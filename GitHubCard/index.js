@@ -71,6 +71,8 @@ const githubUsers = [
 ];
 const cards = document.querySelector(".cards");
 
+
+
 //Make the github card
 
 //create card elements
@@ -85,6 +87,8 @@ function cardMaker(object) {
   const followers = document.createElement("a");
   const following = document.createElement("a");
   const bio = document.createElement("p");
+  const moreInfo = document.createElement("div");
+  const moreInfoButton = document.createElement("button");
   const followCount = document.createElement("p");
   const followersCount = document.createElement("p");
   const hireable = document.createElement("p");
@@ -98,6 +102,7 @@ function cardMaker(object) {
   cardInfo.classList.add("card-info");
   profileName.classList.add("name");
   userName.classList.add("username");
+  moreInfo.classList.add("hideInfo");
 
   //set attributes and content
   profilePicture.src = object.avatar_url;
@@ -117,6 +122,7 @@ function cardMaker(object) {
   profileCreated.textContent = `Profile Created: ${object.created_at}`;
   profileLastSeen.textContent = `Last seen: ${object.updated_at}`;
   accountType.textContent = `Account type: ${object.type}`;
+  moreInfoButton.textContent = "More Info";
 
   //Append
 
@@ -129,13 +135,27 @@ function cardMaker(object) {
   cardInfo.appendChild(followers);
   cardInfo.appendChild(following);
   cardInfo.appendChild(bio);
-  cardInfo.appendChild(followCount);
-  cardInfo.appendChild(followersCount);
-  cardInfo.appendChild(hireable);
-  cardInfo.appendChild(publicRepos);
-  cardInfo.appendChild(accountType);
-  cardInfo.appendChild(profileCreated);
-  cardInfo.appendChild(profileLastSeen);
+  mainCard.appendChild(moreInfo);
+  cardInfo.appendChild(moreInfoButton);
+  moreInfo.appendChild(followCount);
+  moreInfo.appendChild(followersCount);
+  moreInfo.appendChild(hireable);
+  moreInfo.appendChild(publicRepos);
+  moreInfo.appendChild(accountType);
+  moreInfo.appendChild(profileCreated);
+  moreInfo.appendChild(profileLastSeen);
+
+  //event listeners
+  moreInfoButton.addEventListener("click", function (event) {
+    moreInfo.classList.toggle("hideInfo");
+  });
+
+  mainCard.addEventListener('click',function(event){
+    mainCard.style.color='white';
+    mainCard.style.backgroundColor='Black'
+  })
+
+
 
   return mainCard;
 }
